@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out;
+}
+
+.app-overlay {
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(1px);
+  min-height: 100vh;
+}
+
+.dark .app-overlay {
+  background-color: rgba(17, 24, 39, 0.4);
+}
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  body {
+    @apply text-gray-900;
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "washwish-frontend",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.0",
+    "axios": "^1.3.0",
+    "html2canvas": "^1.4.0",
+    "jspdf": "^3.0.3",
+    "lucide-react": "^0.263.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.0",
+    "react-router-dom": "^6.8.0",
+    "react-toastify": "^9.1.0",
+    "recharts": "^2.5.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.2.0",
+    "vite": "^7.1.12"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start-dev": "node start-dev.js",
+    "backend": "cd backend && npm run dev",
+    "test-db": "cd backend && npm run test-db",
+    "test-api": "node test-integration.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

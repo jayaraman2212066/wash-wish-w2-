@@ -1,0 +1,142 @@
+[
+  {
+    "_id": "17614816413487er52z5kl",
+    "orderNumber": "WW641348",
+    "customerId": "17614814674705ir89b7cs",
+    "items": [
+      {
+        "type": "comforter",
+        "quantity": 1,
+        "pricePerUnit": 250,
+        "total": 250,
+        "services": []
+      },
+      {
+        "type": "pillowcover",
+        "quantity": 1,
+        "pricePerUnit": 50,
+        "total": 50,
+        "services": []
+      },
+      {
+        "type": "bedsheet",
+        "quantity": 1,
+        "pricePerUnit": 150,
+        "total": 150,
+        "services": []
+      },
+      {
+        "type": "blanket",
+        "quantity": 1,
+        "pricePerUnit": 200,
+        "total": 200,
+        "services": []
+      }
+    ],
+    "totalAmount": 650,
+    "deliveryCharges": 0,
+    "treatmentCharges": 0,
+    "pickupAddress": "NO N373, KAMESVARAM, VETTARKADU Nagapattinam Tamil Nadu India, 611110",
+    "deliveryAddress": "NO N373, KAMESVARAM, VETTARKADU Nagapattinam Tamil Nadu India, 611110",
+    "pickupDate": "2025-10-28",
+    "deliveryDate": "2025-10-31",
+    "paymentMethod": "online",
+    "paymentStatus": "pending",
+    "orderStatus": "pending",
+    "specialInstructions": "dry wash",
+    "deliveryOption": "regular",
+    "specialTreatments": [],
+    "statusHistory": [
+      {
+        "status": "pending",
+        "timestamp": "2025-10-26T12:27:21.348Z",
+        "note": "Order created"
+      }
+    ],
+    "createdAt": "2025-10-26T12:27:21.348Z"
+  },
+  {
+    "_id": "1761484409370254mr9w2g",
+    "orderNumber": "WW409370",
+    "customerId": "17614814674705ir89b7cs",
+    "items": [
+      {
+        "type": "tshirt",
+        "quantity": 1,
+        "pricePerUnit": 80,
+        "total": 80,
+        "services": []
+      },
+      {
+        "type": "pants",
+        "quantity": 1,
+        "pricePerUnit": 120,
+        "total": 120,
+        "services": []
+      },
+      {
+        "type": "suit",
+        "quantity": 1,
+        "pricePerUnit": 400,
+        "total": 400,
+        "services": []
+      }
+    ],
+    "totalAmount": 600,
+    "deliveryCharges": 0,
+    "treatmentCharges": 0,
+    "pickupAddress": "NO N373, KAMESVARAM, VETTARKADU Nagapattinam Tamil Nadu India, 611110",
+    "deliveryAddress": "NO N373, KAMESVARAM, VETTARKADU Nagapattinam Tamil Nadu India, 611110",
+    "pickupDate": "2025-10-28",
+    "deliveryDate": "2025-11-05",
+    "paymentMethod": "online",
+    "paymentStatus": "pending",
+    "orderStatus": "pending",
+    "specialInstructions": "",
+    "deliveryOption": "regular",
+    "specialTreatments": [],
+    "statusHistory": [
+      {
+        "status": "pending",
+        "timestamp": "2025-10-26T13:13:29.370Z",
+        "note": "Order created"
+      }
+    ],
+    "createdAt": "2025-10-26T13:13:29.370Z"
+  },
+  {
+    "_id": "1761484558576372simgtg",
+    "orderNumber": "WW558575",
+    "customerId": "17614814674705ir89b7cs",
+    "items": [
+      {
+        "type": "tshirt",
+        "quantity": 2,
+        "pricePerUnit": 80,
+        "total": 160,
+        "services": []
+      }
+    ],
+    "totalAmount": 160,
+    "deliveryCharges": 0,
+    "treatmentCharges": 0,
+    "pickupAddress": "NO N373, KAMESVARAM, VETTARKADU Nagapattinam Tamil Nadu India, 611110",
+    "deliveryAddress": "NO N373, KAMESVARAM, VETTARKADU Nagapattinam Tamil Nadu India, 611110",
+    "pickupDate": "2025-10-26",
+    "deliveryDate": "2025-10-28",
+    "paymentMethod": "online",
+    "paymentStatus": "pending",
+    "orderStatus": "pending",
+    "specialInstructions": "",
+    "deliveryOption": "regular",
+    "specialTreatments": [],
+    "statusHistory": [
+      {
+        "status": "pending",
+        "timestamp": "2025-10-26T13:15:58.575Z",
+        "note": "Order created"
+      }
+    ],
+    "createdAt": "2025-10-26T13:15:58.576Z"
+  }
+]

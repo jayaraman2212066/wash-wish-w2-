@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "1",
+    "name": "Admin User",
+    "email": "admin@washwish.com",
+    "password": "$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/VcSAg/9qm",
+    "phone": "9999999999",
+    "address": "Admin Office",
+    "role": "admin",
+    "isActive": true,
+    "createdAt": "2025-10-26T11:50:09.679Z"
+  },
+  {
+    "_id": "17614814674705ir89b7cs",
+    "name": "Jayaraman K",
+    "email": "jayaramankalidasan@gmail.com",
+    "password": "$2a$12$hQ9hPPt8mPaZOz98I.GaUOaxPkiV97iU0BEWAxTzKFv330hExXDdq",
+    "phone": "06369804386",
+    "address": "NO N373, KAMESVARAM, VETTARKADU Nagapattinam Tamil Nadu India, 611110",
+    "role": "customer",
+    "isActive": true,
+    "createdAt": "2025-10-26T12:24:27.470Z"
+  }
+]

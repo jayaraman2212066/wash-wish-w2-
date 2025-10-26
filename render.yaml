@@ -1,9 +1,10 @@
 services:
   - type: web
-    name: washwish-backend
+    name: washwish-app
     env: node
-    buildCommand: cd backend && npm install
+    buildCommand: npm install && cd backend && npm install && cd .. && npm run build
     startCommand: cd backend && npm start
+    staticPublishPath: ./dist
     envVars:
       - key: NODE_ENV
         value: production
@@ -11,24 +12,7 @@ services:
         generateValue: true
       - key: PORT
         value: 10000
-      - key: FRONTEND_URL
-        value: https://washwish-frontend.onrender.com
-      - key: RAZORPAY_KEY_ID
-        value: rzp_test_your_key_id
-      - key: RAZORPAY_KEY_SECRET
-        value: your_razorpay_secret_key
-      - key: EMAIL_USER
-        value: washwish.service@gmail.com
-      - key: EMAIL_PASS
-        value: your-gmail-app-password
-
-  - type: web
-    name: washwish-frontend
-    env: static
-    buildCommand: npm install && npm run build
-    staticPublishPath: ./dist
-    envVars:
       - key: VITE_API_BASE_URL
-        value: https://washwish-backend.onrender.com/api
-      - key: VITE_RAZORPAY_KEY
+        value: /api
+      - key: RAZORPAY_KEY_ID
         value: rzp_test_your_key_id

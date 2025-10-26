@@ -2,7 +2,7 @@ services:
   - type: web
     name: washwish-app
     env: node
-    buildCommand: npm install --include=dev && npm run build && cd backend && npm install
+    buildCommand: npm install && npx vite build && cd backend && npm install
     startCommand: cd backend && npm start
     staticPublishPath: ./dist
     envVars:

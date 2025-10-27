@@ -85,7 +85,7 @@ const Layout = ({ children }) => {
       {/* Mobile sidebar */}
       <div className={`fixed inset-0 z-50 lg:hidden ${sidebarOpen ? 'block' : 'hidden'}`}>
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75" onClick={() => setSidebarOpen(false)} />
-        <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-white/5 dark:bg-gray-800/5 backdrop-blur-sm">
+        <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
           <div className="flex h-16 items-center justify-between px-4">
             <div className="flex items-center">
               <span className="text-2xl mr-2">🧺</span>
@@ -120,7 +120,7 @@ const Layout = ({ children }) => {
 
       {/* Desktop sidebar */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-        <div className="flex flex-col flex-grow bg-white/5 dark:bg-gray-800/5 backdrop-blur-sm border-r border-gray-200 dark:border-gray-700">
+        <div className="flex flex-col flex-grow bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-r border-gray-200 dark:border-gray-700">
           <div className="flex h-16 items-center px-4">
             <div className="flex items-center">
               <span className="text-2xl mr-2">🧺</span>
@@ -152,7 +152,7 @@ const Layout = ({ children }) => {
       {/* Main content */}
       <div className="lg:pl-64">
         {/* Top bar */}
-        <div className="sticky top-0 z-40 flex h-16 bg-white/5 dark:bg-gray-800/5 backdrop-blur-sm shadow">
+        <div className="sticky top-0 z-40 flex h-16 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow">
           <button
             className="px-4 text-gray-500 focus:outline-none lg:hidden"
             onClick={() => setSidebarOpen(true)}

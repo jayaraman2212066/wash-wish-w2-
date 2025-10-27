@@ -87,7 +87,7 @@ const CreateOrder = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="bg-white/5 dark:bg-gray-800/5 backdrop-blur-sm rounded-lg shadow">
+      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow">
         <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Create New Order</h1>
         </div>
@@ -100,19 +100,49 @@ const CreateOrder = () => {
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {Object.entries(CLOTH_TYPES).map(([key, cloth]) => {
-                // Direct mapping to cloth type names for images in src/assets
-                const imageUrl = `/assets/${key}.jpg`
+                // Use online images since local assets aren't loading
+                const imageMap = {
+                  shirt: 'https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=400&h=300&fit=crop',
+                  tshirt: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop',
+                  pants: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&h=300&fit=crop',
+                  jeans: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=300&fit=crop',
+                  suit: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+                  blazer: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=300&fit=crop',
+                  saree: 'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=300&fit=crop',
+                  salwar: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=300&fit=crop',
+                  lehenga: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=300&fit=crop',
+                  kurta: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=300&fit=crop',
+                  dress: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=300&fit=crop',
+                  skirt: 'https://images.unsplash.com/photo-1583496661160-fb5886a13d24?w=400&h=300&fit=crop',
+                  bedsheet: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop',
+                  pillowcover: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
+                  blanket: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
+                  comforter: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
+                  towel: 'https://images.unsplash.com/photo-1620912189751-c3098c898245?w=400&h=300&fit=crop',
+                  bathrobe: 'https://images.unsplash.com/photo-1620912189751-c3098c898245?w=400&h=300&fit=crop',
+                  curtain: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
+                  tie: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+                  scarf: 'https://images.unsplash.com/photo-1583496661160-fb5886a13d24?w=400&h=300&fit=crop',
+                  dupatta: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=300&fit=crop',
+                  jacket: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=300&fit=crop',
+                  wedding: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=300&fit=crop',
+                  leather: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=300&fit=crop',
+                  sherwani: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+                  coat: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=300&fit=crop',
+                  shorts: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=300&fit=crop'
+                }
+                const imageUrl = imageMap[key] || imageMap.shirt
 
                 
                 return (
-                  <div key={key} className="bg-white/5 dark:bg-gray-700/5 backdrop-blur-sm rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div key={key} className="bg-white/90 dark:bg-gray-700/90 backdrop-blur-sm rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="aspect-w-16 aspect-h-12 bg-gray-200">
                       <img
                         src={imageUrl}
                         alt={cloth.name}
                         className="w-full h-32 object-cover"
                         onError={(e) => {
-                          e.target.src = '/assets/shirt.jpg'
+                          e.target.src = 'https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=400&h=300&fit=crop'
                         }}
                       />
                     </div>
@@ -141,7 +171,7 @@ const CreateOrder = () => {
               </h3>
               <div className="space-y-3">
                 {orderItems.map((item) => (
-                  <div key={item.type} className="flex items-center justify-between p-3 bg-gray-50/5 dark:bg-gray-700/5 backdrop-blur-sm rounded-lg">
+                  <div key={item.type} className="flex items-center justify-between p-3 bg-gray-50/90 dark:bg-gray-700/90 backdrop-blur-sm rounded-lg">
                     <div>
                       <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
                       <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">₹{item.price} each</span>
@@ -172,7 +202,7 @@ const CreateOrder = () => {
                 ))}
               </div>
               
-              <div className="mt-4 p-4 bg-blue-50/5 dark:bg-blue-900/5 backdrop-blur-sm rounded-lg">
+              <div className="mt-4 p-4 bg-blue-50/90 dark:bg-blue-900/90 backdrop-blur-sm rounded-lg">
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-medium text-gray-900 dark:text-white">
                     Total Amount:

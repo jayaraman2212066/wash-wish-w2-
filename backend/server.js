@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const db = require('./database');
 const authService = require('./services/authService');
 const orderService = require('./services/orderService');
@@ -94,6 +95,19 @@ app.get('/api/orders/my', authenticate, (req, res) => {
   try {
     const orders = orderService.getOrdersByCustomer(req.user.userId);
     res.json({ success: true, data: { orders } });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+app.put('/api/orders/:id/status', authenticate, authorize('admin', 'staff'), (req, res) => {
+  try {
+    const { status } = req.body;
+    const updatedOrder = orderService.updateOrderStatus(req.params.id, status);
+    if (!updatedOrder) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+    res.json({ success: true, message: 'Order status updated', data: updatedOrder });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -252,12 +266,12 @@ app.get('*', (req, res) => {
   }
   
   // Serve React app for all other routes
-  res.sendFile(path.join(__dirname, '../dist/index.html'), (err) => {
-    if (err) {
-      console.error('Error serving index.html:', err);
-      res.status(500).send('Server Error');
-    }
-  });
+  const indexPath = path.join(__dirname, '../dist/index.html');
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).send('App not found - please build the frontend first');
+  }
 });
 
 const PORT = process.env.PORT || 10000;

@@ -26,7 +26,7 @@ const orderSlice = createSlice({
       state.orders.unshift(action.payload)
     },
     updateOrder: (state, action) => {
-      const index = state.orders.findIndex(order => order.id === action.payload.id)
+      const index = state.orders.findIndex(order => (order._id || order.id) === (action.payload._id || action.payload.id))
       if (index !== -1) {
         state.orders[index] = action.payload
       }

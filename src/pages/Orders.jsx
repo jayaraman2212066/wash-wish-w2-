@@ -31,6 +31,18 @@ const Orders = () => {
     }
   }, [user])
 
+  // Refresh orders when component mounts or when navigating back
+  useEffect(() => {
+    const handleFocus = () => {
+      if (user?.role) {
+        fetchOrders()
+      }
+    }
+    
+    window.addEventListener('focus', handleFocus)
+    return () => window.removeEventListener('focus', handleFocus)
+  }, [user])
+
   useEffect(() => {
     applyFilters()
   }, [orders, filters])
@@ -42,10 +54,15 @@ const Orders = () => {
         return
       }
       const endpoint = user.role === USER_ROLES.CUSTOMER ? '/orders/my' : '/orders'
+      console.log('Fetching orders from:', endpoint)
       const response = await api.get(endpoint)
-      dispatch(setOrders(response.data.data?.orders || []))
+      console.log('Orders response:', response.data)
+      const orders = response.data.data?.orders || []
+      console.log('Setting orders:', orders)
+      dispatch(setOrders(orders))
     } catch (error) {
       console.error('Error fetching orders:', error)
+      toast.error('Failed to load orders')
       dispatch(setOrders([]))
     }
   }
@@ -123,15 +140,24 @@ const Orders = () => {
         <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Orders</h1>
-            {user?.role === USER_ROLES.CUSTOMER && (
-              <Link
-                to="/orders/create"
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={fetchOrders}
+                className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
-                <Plus className="h-4 w-4 mr-2" />
-                New Order
-              </Link>
-            )}
+                <Download className="h-4 w-4 mr-2" />
+                Refresh
+              </button>
+              {user?.role === USER_ROLES.CUSTOMER && (
+                <Link
+                  to="/orders/create"
+                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  New Order
+                </Link>
+              )}
+            </div>
           </div>
         </div>
 

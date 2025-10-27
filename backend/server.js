@@ -40,7 +40,17 @@ app.get('/api/health', (req, res) => {
 app.get('/api/test/orders', (req, res) => {
   try {
     const orders = orderService.getAllOrders();
-    res.json({ success: true, message: 'Orders endpoint working', count: orders.length });
+    res.json({ success: true, message: 'Orders endpoint working', count: orders.length, orders });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// Test endpoint for user orders
+app.get('/api/test/orders/:userId', (req, res) => {
+  try {
+    const orders = orderService.getOrdersByCustomer(req.params.userId);
+    res.json({ success: true, message: 'User orders endpoint working', count: orders.length, orders });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

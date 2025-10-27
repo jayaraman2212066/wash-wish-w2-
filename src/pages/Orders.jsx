@@ -71,9 +71,14 @@ const Orders = () => {
       const orders = response.data.data?.orders || []
       console.log('Setting orders:', orders)
       dispatch(setOrders(orders))
+      if (orders.length === 0) {
+        console.log('No orders found for user:', user.userId)
+      }
     } catch (error) {
       console.error('Error fetching orders:', error)
-      toast.error('Failed to load orders')
+      console.error('Error details:', error.response?.data)
+      const errorMsg = error.response?.data?.message || error.message || 'Failed to load orders'
+      toast.error(errorMsg)
       dispatch(setOrders([]))
     }
   }

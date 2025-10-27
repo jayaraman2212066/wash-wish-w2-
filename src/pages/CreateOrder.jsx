@@ -100,36 +100,36 @@ const CreateOrder = () => {
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {Object.entries(CLOTH_TYPES).map(([key, cloth]) => {
-                // Use online images since local assets aren't loading
+                // Use local images from assets folder
                 const imageMap = {
-                  shirt: 'https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=400&h=300&fit=crop',
-                  tshirt: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop',
-                  pants: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&h=300&fit=crop',
-                  jeans: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=300&fit=crop',
-                  suit: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-                  blazer: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=300&fit=crop',
-                  saree: 'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=300&fit=crop',
-                  salwar: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=300&fit=crop',
-                  lehenga: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=300&fit=crop',
-                  kurta: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=300&fit=crop',
-                  dress: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=300&fit=crop',
-                  skirt: 'https://images.unsplash.com/photo-1583496661160-fb5886a13d24?w=400&h=300&fit=crop',
-                  bedsheet: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop',
-                  pillowcover: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-                  blanket: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
-                  comforter: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
-                  towel: 'https://images.unsplash.com/photo-1620912189751-c3098c898245?w=400&h=300&fit=crop',
-                  bathrobe: 'https://images.unsplash.com/photo-1620912189751-c3098c898245?w=400&h=300&fit=crop',
-                  curtain: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-                  tie: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-                  scarf: 'https://images.unsplash.com/photo-1583496661160-fb5886a13d24?w=400&h=300&fit=crop',
-                  dupatta: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=300&fit=crop',
-                  jacket: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=300&fit=crop',
-                  wedding: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=300&fit=crop',
-                  leather: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=300&fit=crop',
-                  sherwani: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-                  coat: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=300&fit=crop',
-                  shorts: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=300&fit=crop'
+                  shirt: '/assets/shirt.avif',
+                  tshirt: '/assets/t-shirt.jpg',
+                  pants: '/assets/trousers.webp',
+                  jeans: '/assets/jeans.avif',
+                  suit: '/assets/suit.webp',
+                  blazer: '/assets/blazers.jpg',
+                  saree: '/assets/saree.jpg',
+                  salwar: '/assets/salwar kameez.jpg',
+                  lehenga: '/assets/lehanga.jpg',
+                  kurta: '/assets/kurta.webp',
+                  dress: '/assets/dress.jpg',
+                  skirt: '/assets/skirt.jpg',
+                  bedsheet: '/assets/bedsheet.jpg',
+                  pillowcover: '/assets/pillow cover.jpg',
+                  blanket: '/assets/blanket.jpg',
+                  comforter: '/assets/blanket.jpg',
+                  towel: '/assets/towel.jpg',
+                  bathrobe: '/assets/bathrope.jpg',
+                  curtain: '/assets/curtains.webp',
+                  tie: '/assets/tie.jpg',
+                  scarf: '/assets/scarf.jpg',
+                  dupatta: '/assets/dupatta.jpg',
+                  jacket: '/assets/jacket.jpg',
+                  wedding: '/assets/wedding dress.jpg',
+                  leather: '/assets/jacket.jpg',
+                  sherwani: '/assets/sherwani.jpg',
+                  coat: '/assets/wintor coat.jpg',
+                  shorts: '/assets/shorts.webp'
                 }
                 const imageUrl = imageMap[key] || imageMap.shirt
 
@@ -142,7 +142,7 @@ const CreateOrder = () => {
                         alt={cloth.name}
                         className="w-full h-32 object-cover"
                         onError={(e) => {
-                          e.target.src = 'https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=400&h=300&fit=crop'
+                          e.target.src = '/assets/shirt.avif'
                         }}
                       />
                     </div>

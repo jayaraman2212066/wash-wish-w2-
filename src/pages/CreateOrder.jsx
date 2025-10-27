@@ -108,11 +108,11 @@ const CreateOrder = () => {
                   jeans: 'jeans.avif',
                   suit: 'suit.webp',
                   blazer: 'blazers.jpg',
-                  saree: 'shirt.avif',
+                  saree: 'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=300&fit=crop',
                   salwar: 'salwar kameez.jpg',
                   lehenga: 'lehanga.jpg',
                   kurta: 'kurta.webp',
-                  dress: 'shirt.avif',
+                  dress: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=300&fit=crop',
                   skirt: 'skirt.jpg',
                   bedsheet: 'bedsheet.jpg',
                   pillowcover: 'pillow cover.jpg',
@@ -129,12 +129,12 @@ const CreateOrder = () => {
                   leather: 'jacket.jpg',
                   sherwani: 'sherwani.jpg',
                   coat: 'wintor coat.jpg',
-                  shorts: 'shirt.avif'
+                  shorts: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=300&fit=crop'
                 }
-                const imageUrl = `/images/assets/${imageMap[key] || 'shirt.avif'}`
+                const imageUrl = imageMap[key]?.startsWith('http') ? imageMap[key] : `/images/assets/${imageMap[key] || 'shirt.avif'}`
                 
                 return (
-                  <div key={key} className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div key={key} className="bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="aspect-w-16 aspect-h-12 bg-gray-200">
                       <img
                         src={imageUrl}

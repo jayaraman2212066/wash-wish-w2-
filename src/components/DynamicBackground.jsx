@@ -24,7 +24,7 @@ const DynamicBackground = () => {
         <div
           key={bg}
           className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-            index === currentBg ? 'opacity-10' : 'opacity-0'
+            index === currentBg ? 'opacity-5' : 'opacity-0'
           }`}
           style={{ backgroundImage: `url(${bg})` }}
         />

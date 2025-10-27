@@ -26,8 +26,10 @@ const Orders = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    fetchOrders()
-  }, [])
+    if (user?.role) {
+      fetchOrders()
+    }
+  }, [user])
 
   useEffect(() => {
     applyFilters()
@@ -35,7 +37,11 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const endpoint = user?.role === USER_ROLES.CUSTOMER ? '/orders/my' : '/orders'
+      if (!user?.role) {
+        console.log('User not available yet')
+        return
+      }
+      const endpoint = user.role === USER_ROLES.CUSTOMER ? '/orders/my' : '/orders'
       const response = await api.get(endpoint)
       dispatch(setOrders(response.data.data?.orders || []))
     } catch (error) {

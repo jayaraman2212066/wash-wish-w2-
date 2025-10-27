@@ -14,13 +14,19 @@ const Payments = () => {
   const { user } = useSelector((state) => state.auth)
 
   useEffect(() => {
-    fetchPayments()
-  }, [])
+    if (user?._id) {
+      fetchPayments()
+    }
+  }, [user])
 
   const fetchPayments = async () => {
     try {
+      if (!user?._id) {
+        console.log('User not available yet')
+        return
+      }
       const response = await api.get(`/payments/user/${user._id}`)
-      setPayments(response.data.data.payments)
+      setPayments(response.data.data?.payments || [])
     } catch (error) {
       console.error('Error fetching payments:', error)
       setPayments([])

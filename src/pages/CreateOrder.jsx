@@ -87,7 +87,7 @@ const CreateOrder = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div className="bg-white/5 dark:bg-gray-800/5 backdrop-blur-sm rounded-lg shadow">
         <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Create New Order</h1>
         </div>
@@ -134,7 +134,7 @@ const CreateOrder = () => {
                 const imageUrl = imageMap[key]?.startsWith('http') ? imageMap[key] : `/images/assets/${imageMap[key] || 'shirt.avif'}`
                 
                 return (
-                  <div key={key} className="bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div key={key} className="bg-white/5 dark:bg-gray-700/5 backdrop-blur-sm rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="aspect-w-16 aspect-h-12 bg-gray-200">
                       <img
                         src={imageUrl}
@@ -170,7 +170,7 @@ const CreateOrder = () => {
               </h3>
               <div className="space-y-3">
                 {orderItems.map((item) => (
-                  <div key={item.type} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <div key={item.type} className="flex items-center justify-between p-3 bg-gray-50/5 dark:bg-gray-700/5 backdrop-blur-sm rounded-lg">
                     <div>
                       <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
                       <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">₹{item.price} each</span>
@@ -201,7 +201,7 @@ const CreateOrder = () => {
                 ))}
               </div>
               
-              <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+              <div className="mt-4 p-4 bg-blue-50/5 dark:bg-blue-900/5 backdrop-blur-sm rounded-lg">
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-medium text-gray-900 dark:text-white">
                     Total Amount:

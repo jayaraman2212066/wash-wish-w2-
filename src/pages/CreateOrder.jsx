@@ -339,7 +339,6 @@ const CreateOrder = () => {
           </div>
         </form>
       </div>
-    </div>
       
       <PaymentModal
         isOpen={showPaymentModal}

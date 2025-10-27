@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard'
 import Orders from './pages/Orders'
 import OrdersSimple from './pages/OrdersSimple'
 import OrdersTest from './pages/OrdersTest'
+import OrdersFixed from './pages/OrdersFixed'
 import CreateOrder from './pages/CreateOrder'
 import Payments from './pages/Payments'
 import Reports from './pages/Reports'
@@ -91,7 +92,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/orders" element={<OrdersTest />} />
+        <Route path="/orders" element={<OrdersFixed />} />
         <Route 
           path="/orders/create" 
           element={

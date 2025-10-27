@@ -1,0 +1,12 @@
+node_modules
+.git
+*.log
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+src/pages/OrdersTest.jsx
+src/pages/OrdersSimple.jsx
+src/pages/OrdersMinimal.jsx
+README.md
+.gitignore

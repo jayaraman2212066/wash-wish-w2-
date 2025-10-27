@@ -4,9 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node copy-assets.cjs && vite build && cd backend && npm install --production",
+    "build": "node copy-assets.cjs && vite build",
     "preview": "vite preview",
-    "start": "cd backend && npm start",
+    "start": "node backend/server.js",
     "install-all": "npm install && cd backend && npm install"
   },
   "dependencies": {

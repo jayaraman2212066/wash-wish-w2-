@@ -244,9 +244,20 @@ app.post('/api/ai/estimate-cost', authenticate, (req, res) => {
   }
 });
 
-// SPA Routing - MUST be last route
+// Handle all non-API routes for SPA
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
+  // Don't serve index.html for API routes
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ success: false, message: 'API endpoint not found' });
+  }
+  
+  // Serve React app for all other routes
+  res.sendFile(path.join(__dirname, '../dist/index.html'), (err) => {
+    if (err) {
+      console.error('Error serving index.html:', err);
+      res.status(500).send('Server Error');
+    }
+  });
 });
 
 const PORT = process.env.PORT || 10000;

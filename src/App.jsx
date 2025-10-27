@@ -93,7 +93,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/orders" element={<OrdersMinimal />} />
+        <Route path="/orders" element={<OrdersFixed />} />
         <Route 
           path="/orders/create" 
           element={

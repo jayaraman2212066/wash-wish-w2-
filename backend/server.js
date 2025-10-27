@@ -19,6 +19,8 @@ app.use(express.static(path.join(__dirname, '../dist')));
 
 // Serve assets from public/images/assets folder
 app.use('/assets', express.static(path.join(__dirname, '../public/images/assets')));
+app.use('/images', express.static(path.join(__dirname, '../public/images')));
+app.use('/public', express.static(path.join(__dirname, '../public')));
 
 // Health check
 app.get('/api/health', (req, res) => {

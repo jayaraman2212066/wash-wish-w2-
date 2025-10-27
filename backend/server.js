@@ -320,6 +320,66 @@ app.post('/api/ai/estimate-cost', authenticate, (req, res) => {
   }
 });
 
+// SPA Routing - MUST be last route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
+
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => {
+  console.log(`🚀 WashWish Full-Stack App running on port ${PORT}`);
+  console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
+});
+
+module.exports = app;
+
+// AI endpoints
+app.post('/api/ai/estimate-cost', authenticate, (req, res) => {
+  try {
+    const { items } = req.body;
+    const prices = {
+      shirt: 100, tshirt: 80, pants: 120, jeans: 100, shorts: 70,
+      suit: 400, blazer: 250, coat: 300,
+      saree: 200, salwar: 150, lehenga: 500, kurta: 120, sherwani: 400,
+      dress: 180, skirt: 100,
+      bedsheet: 150, pillowcover: 50, blanket: 200, comforter: 250, curtain: 180, towel: 80, bathrobe: 150,
+      wedding: 800, leather: 600,
+      tie: 60, scarf: 80, dupatta: 100, jacket: 250
+    };
+    
+    let totalCost = 0;
+    const estimatedItems = items.map(item => {
+      const pricePerUnit = prices[item.type] || 100;
+      const itemTotal = pricePerUnit * item.quantity;
+      totalCost += itemTotal;
+      
+      return {
+        type: item.type,
+        quantity: item.quantity,
+        pricePerUnit,
+        total: itemTotal
+      };
+    });
+    
+    const bulkDiscount = totalCost > 1000 ? totalCost * 0.1 : 0;
+    const finalCost = totalCost - bulkDiscount;
+    
+    res.json({
+      success: true,
+      data: {
+        items: estimatedItems,
+        baseCost: totalCost,
+        adjustments: { bulkDiscount, seasonalDiscount: 0, loyaltyDiscount: 0, urgentCharges: 0 },
+        finalCost: Math.round(finalCost),
+        estimatedTime: '24-48 hours',
+        confidence: 0.95
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // Admin endpoints
 app.get('/api/admin/customers', authenticate, authorize('admin'), (req, res) => {
   try {

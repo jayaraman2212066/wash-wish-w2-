@@ -317,7 +317,12 @@ app.post('/api/ai/estimate-cost', authenticate, (req, res) => {
   }
 });
 
-// Serve React app for all non-API routes
+// Handle all API routes that don't exist
+app.all('/api/*', (req, res) => {
+  res.status(404).json({ success: false, message: 'API endpoint not found' });
+});
+
+// Serve React app for all non-API routes (SPA routing)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });

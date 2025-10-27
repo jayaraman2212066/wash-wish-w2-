@@ -92,22 +92,7 @@ app.post('/api/orders', authenticate, (req, res) => {
 
 app.get('/api/orders/my', authenticate, (req, res) => {
   try {
-    let orders = orderService.getOrdersByCustomer(req.user.userId);
-    
-    // If no orders, create mock data for demo
-    if (orders.length === 0) {
-      orders = [{
-        _id: 'demo-order-1',
-        orderNumber: 'WW001',
-        customerId: req.user.userId,
-        items: [{ type: 'shirt', quantity: 2, pricePerUnit: 100, total: 200 }],
-        totalAmount: 200,
-        orderStatus: 'pending',
-        paymentStatus: 'pending',
-        createdAt: new Date().toISOString()
-      }];
-    }
-    
+    const orders = orderService.getOrdersByCustomer(req.user.userId);
     res.json({ success: true, data: { orders } });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -138,14 +123,7 @@ app.get('/api/payments/user/:id', authenticate, (req, res) => {
       return res.status(403).json({ success: false, message: 'Access denied' });
     }
     
-    let payments = [];
-    try {
-      payments = paymentService.getPaymentsByCustomer(req.params.id);
-    } catch (error) {
-      // If service fails, return empty array
-      payments = [];
-    }
-    
+    const payments = paymentService.getPaymentsByCustomer(req.params.id);
     res.json({ success: true, data: { payments, pagination: { page: 1, limit: 10, total: payments.length, pages: 1 } } });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

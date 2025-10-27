@@ -17,10 +17,11 @@ app.use(express.json());
 // Serve static files from React build
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// Serve assets from public/images/assets folder
-app.use('/assets', express.static(path.join(__dirname, '../public/images/assets')));
+// Serve all static assets
+app.use('/assets', express.static(path.join(__dirname, '../dist/assets')));
 app.use('/images', express.static(path.join(__dirname, '../public/images')));
 app.use('/public', express.static(path.join(__dirname, '../public')));
+app.use('/api/images', express.static(path.join(__dirname, '../public/images')));
 
 // Health check
 app.get('/api/health', (req, res) => {

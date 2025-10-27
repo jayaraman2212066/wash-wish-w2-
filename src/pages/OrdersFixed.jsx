@@ -20,7 +20,9 @@ const OrdersFixed = () => {
     try {
       setLoading(true)
       const endpoint = user.role === USER_ROLES.CUSTOMER ? '/orders/my' : '/orders'
+      console.log('Admin fetching from:', endpoint, 'User role:', user.role)
       const response = await api.get(endpoint)
+      console.log('Admin orders response:', response.data)
       setOrders(response.data.data?.orders || [])
     } catch (error) {
       console.error('Error fetching orders:', error)
@@ -89,6 +91,9 @@ const OrdersFixed = () => {
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order ID</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Items</th>
+                  {user?.role === USER_ROLES.ADMIN && (
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Customer</th>
+                  )}
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
@@ -103,6 +108,11 @@ const OrdersFixed = () => {
                     <td className="px-6 py-4 text-sm text-gray-900">
                       {order.items?.map(item => `${item.quantity}x ${item.type}`).join(', ')}
                     </td>
+                    {user?.role === USER_ROLES.ADMIN && (
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        Customer ID: {order.customerId}
+                      </td>
+                    )}
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       ₹{order.totalAmount}
                     </td>

@@ -39,8 +39,19 @@ const Orders = () => {
       }
     }
     
+    const handleVisibilityChange = () => {
+      if (!document.hidden && user?.role) {
+        fetchOrders()
+      }
+    }
+    
     window.addEventListener('focus', handleFocus)
-    return () => window.removeEventListener('focus', handleFocus)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    
+    return () => {
+      window.removeEventListener('focus', handleFocus)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
   }, [user])
 
   useEffect(() => {
@@ -142,7 +153,10 @@ const Orders = () => {
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Orders</h1>
             <div className="flex items-center space-x-3">
               <button
-                onClick={fetchOrders}
+                onClick={() => {
+                  dispatch(setOrders([]))
+                  fetchOrders()
+                }}
                 className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <Download className="h-4 w-4 mr-2" />

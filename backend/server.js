@@ -25,6 +25,16 @@ app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'WashWish API is running', timestamp: new Date().toISOString() });
 });
 
+// Debug endpoint to check orders
+app.get('/api/debug/orders', (req, res) => {
+  try {
+    const allOrders = orderService.getAllOrders();
+    res.json({ success: true, data: { orders: allOrders, count: allOrders.length } });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // Auth routes
 app.post('/api/auth/register', async (req, res) => {
   try {
@@ -93,9 +103,12 @@ app.post('/api/orders', authenticate, (req, res) => {
 
 app.get('/api/orders/my', authenticate, (req, res) => {
   try {
+    console.log('Fetching orders for user:', req.user.userId);
     const orders = orderService.getOrdersByCustomer(req.user.userId);
+    console.log('Found orders:', orders.length);
     res.json({ success: true, data: { orders } });
   } catch (error) {
+    console.error('Error in /api/orders/my:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 });

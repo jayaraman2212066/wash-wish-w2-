@@ -138,7 +138,16 @@ app.post('/api/orders', authenticate, (req, res) => {
     const orderData = { ...req.body, customerId: req.user.userId };
     const order = orderService.createOrder(orderData);
     
-    console.log('Order created successfully:', order.id);
+    // Auto-create payment record
+    const payment = paymentService.createPayment({
+      orderId: order._id,
+      customerId: req.user.userId,
+      amount: order.totalAmount,
+      method: orderData.paymentMethod || 'online',
+      status: 'pending'
+    });
+    
+    console.log('Order created successfully:', order._id);
     res.json({ success: true, message: 'Order created successfully', data: order });
   } catch (error) {
     console.error('Order creation error:', error);
@@ -183,6 +192,44 @@ app.get('/api/orders', authenticate, authorize('admin', 'staff'), (req, res) => 
     }
     
     res.json({ success: true, data: { orders } });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// Payment simulation endpoint
+app.post('/api/payments/simulate', authenticate, (req, res) => {
+  try {
+    const { orderId, amount, method } = req.body;
+    
+    // Simulate payment processing
+    const paymentResult = Math.random() > 0.1 ? 'success' : 'failed'; // 90% success rate
+    
+    if (paymentResult === 'success') {
+      // Update payment status
+      const payment = paymentService.updatePaymentStatus(orderId, 'paid');
+      
+      // Update order payment status
+      orderService.updateOrderPaymentStatus(orderId, 'paid');
+      
+      res.json({ 
+        success: true, 
+        message: 'Payment processed successfully', 
+        data: { 
+          paymentId: `pay_${Date.now()}`,
+          status: 'paid',
+          amount,
+          method,
+          transactionId: `txn_${Date.now()}`
+        }
+      });
+    } else {
+      res.status(400).json({ 
+        success: false, 
+        message: 'Payment failed. Please try again.',
+        data: { status: 'failed' }
+      });
+    }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

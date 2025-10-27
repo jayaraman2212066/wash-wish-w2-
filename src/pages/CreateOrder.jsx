@@ -5,7 +5,7 @@ import { Plus, Minus, Calculator } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { CLOTH_TYPES } from '../utils/constants'
 import { addOrder } from '../context/orderSlice'
-// import ClothCard from '../components/ClothCard'
+import PaymentModal from '../components/PaymentModal'
 import api from '../utils/api'
 
 const CreateOrder = () => {
@@ -19,6 +19,8 @@ const CreateOrder = () => {
     specialInstructions: '',
   })
   const [loading, setLoading] = useState(false)
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [createdOrder, setCreatedOrder] = useState(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -78,8 +80,9 @@ const CreateOrder = () => {
       const response = await api.post('/orders', orderData)
       console.log('Order created successfully:', response.data)
       dispatch(addOrder(response.data.data))
+      setCreatedOrder(response.data.data)
       toast.success('Order created successfully!')
-      navigate('/orders')
+      setShowPaymentModal(true)
     } catch (error) {
       console.error('Order creation failed:', error)
       console.error('Error response:', error.response?.data)
@@ -336,6 +339,20 @@ const CreateOrder = () => {
           </div>
         </form>
       </div>
+    </div>
+      
+      <PaymentModal
+        isOpen={showPaymentModal}
+        onClose={() => {
+          setShowPaymentModal(false)
+          navigate('/orders')
+        }}
+        order={createdOrder}
+        onPaymentSuccess={() => {
+          toast.success('Payment completed successfully!')
+          navigate('/orders')
+        }}
+      />
     </div>
   )
 }

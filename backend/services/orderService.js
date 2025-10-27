@@ -113,6 +113,10 @@ class OrderService {
     };
   }
 
+  updateOrderPaymentStatus(orderId, paymentStatus) {
+    return db.updateById('orders', orderId, { paymentStatus });
+  }
+
   searchOrders(query) {
     const orders = db.read('orders');
     return orders.filter(order => 

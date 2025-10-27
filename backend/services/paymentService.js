@@ -38,6 +38,22 @@ class PaymentService {
     return db.read('payments') || [];
   }
 
+  createPayment(paymentData) {
+    return db.insert('payments', {
+      ...paymentData,
+      paymentStatus: paymentData.status || 'pending'
+    });
+  }
+
+  updatePaymentStatus(orderId, status) {
+    const payments = db.read('payments');
+    const payment = payments.find(p => p.orderId === orderId);
+    if (payment) {
+      return db.updateById('payments', payment._id, { paymentStatus: status });
+    }
+    return null;
+  }
+
   getPaymentStats() {
     const payments = db.read('payments') || [];
     const paid = payments.filter(p => p.paymentStatus === 'paid');

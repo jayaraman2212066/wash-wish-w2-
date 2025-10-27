@@ -11,6 +11,7 @@ import VerifyEmail from './pages/VerifyEmail'
 import Dashboard from './pages/Dashboard'
 import Orders from './pages/Orders'
 import OrdersSimple from './pages/OrdersSimple'
+import OrdersTest from './pages/OrdersTest'
 import CreateOrder from './pages/CreateOrder'
 import Payments from './pages/Payments'
 import Reports from './pages/Reports'
@@ -90,7 +91,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/orders" element={<OrdersSimple />} />
+        <Route path="/orders" element={<OrdersTest />} />
         <Route 
           path="/orders/create" 
           element={

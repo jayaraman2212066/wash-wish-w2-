@@ -80,9 +80,8 @@ const CreateOrder = () => {
       const response = await api.post('/orders', orderData)
       console.log('Order created successfully:', response.data)
       dispatch(addOrder(response.data.data))
-      setCreatedOrder(response.data.data)
       toast.success('Order created successfully!')
-      setShowPaymentModal(true)
+      navigate('/orders')
     } catch (error) {
       console.error('Order creation failed:', error)
       console.error('Error response:', error.response?.data)
@@ -340,18 +339,7 @@ const CreateOrder = () => {
         </form>
       </div>
       
-      <PaymentModal
-        isOpen={showPaymentModal}
-        onClose={() => {
-          setShowPaymentModal(false)
-          navigate('/orders')
-        }}
-        order={createdOrder}
-        onPaymentSuccess={() => {
-          toast.success('Payment completed successfully!')
-          navigate('/orders')
-        }}
-      />
+
     </div>
   )
 }

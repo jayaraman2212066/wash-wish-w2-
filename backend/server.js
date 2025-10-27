@@ -11,6 +11,15 @@ const { authenticate, authorize } = require('./middleware/auth');
 
 const app = express();
 
+// Handle preflight requests first
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Max-Age', '86400');
+  res.sendStatus(200);
+});
+
 app.use(cors({
   origin: true,
   credentials: true,
@@ -18,7 +27,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.options('*', cors());
 app.use(express.json());
 
 // Serve static files from React build

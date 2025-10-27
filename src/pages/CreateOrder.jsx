@@ -5,7 +5,7 @@ import { Plus, Minus, Calculator } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { CLOTH_TYPES } from '../utils/constants'
 import { addOrder } from '../context/orderSlice'
-import ClothCard from '../components/ClothCard'
+// import ClothCard from '../components/ClothCard'
 import api from '../utils/api'
 
 const CreateOrder = () => {
@@ -99,14 +99,36 @@ const CreateOrder = () => {
               Select Clothes
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {Object.entries(CLOTH_TYPES).map(([key, cloth]) => (
-                <ClothCard
-                  key={key}
-                  clothKey={key}
-                  cloth={cloth}
-                  onAdd={addItem}
-                />
-              ))}
+              {Object.entries(CLOTH_TYPES).map(([key, cloth]) => {
+                const imageName = key.replace('_', ' ').toLowerCase()
+                const imageUrl = `/images/assets/${imageName}.jpg`
+                
+                return (
+                  <div key={key} className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <div className="aspect-w-16 aspect-h-12 bg-gray-200">
+                      <img
+                        src={imageUrl}
+                        alt={cloth.name}
+                        className="w-full h-32 object-cover"
+                        onError={(e) => {
+                          e.target.src = '/images/assets/shirt.avif'
+                        }}
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-medium text-gray-900 dark:text-white">{cloth.name}</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">₹{cloth.price}</p>
+                      <button
+                        type="button"
+                        onClick={() => addItem(key)}
+                        className="mt-2 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+                      >
+                        Add to Order
+                      </button>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
 

@@ -2,39 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const helmet = require('helmet');
 const db = require('./database');
 const authService = require('./services/authService');
 const orderService = require('./services/orderService');
 const paymentService = require('./services/paymentService');
-const { 
-  authenticate, 
-  authorize, 
-  authLimiter, 
-  apiLimiter, 
-  sanitizeInput, 
-  securityHeaders, 
-  securityLogger 
-} = require('./middleware/auth');
+const { authenticate, authorize } = require('./middleware/auth');
 
 const app = express();
 
-// Security middleware
-app.use(helmet({
-  contentSecurityPolicy: false, // We'll handle this manually
-  crossOriginEmbedderPolicy: false
-}));
-app.use(securityHeaders);
-app.use(securityLogger);
-app.use(apiLimiter);
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-app.use(express.json({ limit: '10mb' }));
-app.use(sanitizeInput);
+app.use(cors());
+app.use(express.json());
 
 // Serve static files from React build
 app.use(express.static(path.join(__dirname, '../dist')));
@@ -47,8 +24,8 @@ app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'WashWish API is running', timestamp: new Date().toISOString() });
 });
 
-// Auth routes with rate limiting
-app.post('/api/auth/register', authLimiter, async (req, res) => {
+// Auth routes
+app.post('/api/auth/register', async (req, res) => {
   try {
     const result = await authService.register(req.body);
     res.json({ success: true, message: 'User registered successfully', data: result });
@@ -57,33 +34,13 @@ app.post('/api/auth/register', authLimiter, async (req, res) => {
   }
 });
 
-app.post('/api/auth/login', authLimiter, async (req, res) => {
+app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const result = await authService.login(email, password);
     res.json({ success: true, message: 'Login successful', data: result });
   } catch (error) {
     res.status(401).json({ success: false, message: error.message });
-  }
-});
-
-app.post('/api/auth/change-password', authenticate, async (req, res) => {
-  try {
-    const { currentPassword, newPassword } = req.body;
-    const result = await authService.changePassword(req.user.userId, currentPassword, newPassword);
-    res.json({ success: true, message: result.message });
-  } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
-  }
-});
-
-app.post('/api/auth/forgot-password', authLimiter, async (req, res) => {
-  try {
-    const { email } = req.body;
-    const result = await authService.generatePasswordResetToken(email);
-    res.json({ success: true, message: result.message });
-  } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
   }
 });
 
@@ -272,33 +229,6 @@ app.post('/api/ai/estimate-cost', authenticate, (req, res) => {
     const finalCost = totalCost - bulkDiscount;
     
     res.json({
-      success: true,
-      data: {
-        items: estimatedItems,
-        baseCost: totalCost,
-        adjustments: { bulkDiscount, seasonalDiscount: 0, loyaltyDiscount: 0, urgentCharges: 0 },
-        finalCost: Math.round(finalCost),
-        estimatedTime: '24-48 hours',
-        confidence: 0.95
-      }
-    });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-});
-
-// SPA Routing - MUST be last route to prevent page reloads
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
-
-const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => {
-  console.log(`🚀 WashWish Full-Stack App running on port ${PORT}`);
-  console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
-});
-
-module.exports = app; res.json({
       success: true,
       data: {
         items: estimatedItems,

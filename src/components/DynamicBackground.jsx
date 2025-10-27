@@ -4,10 +4,10 @@ const DynamicBackground = () => {
   const [currentBg, setCurrentBg] = useState(0)
   
   const backgrounds = [
-    '/images/assets/background1.jpg',
-    '/images/assets/background2.jpg',
-    '/images/assets/background3.jpg',
-    '/images/assets/background4.jpg'
+    '/assets/background1.jpg',
+    '/assets/background2.jpg',
+    '/assets/background3.jpg',
+    '/assets/background4.jpg'
   ]
 
   useEffect(() => {

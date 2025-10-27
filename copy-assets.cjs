@@ -1,8 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
-// Copy all images from public/images/assets to dist folder for deployment
-const sourceDir = path.join(__dirname, 'public', 'images', 'assets')
+// Copy all images from src/assets to dist folder for deployment
+const sourceDir = path.join(__dirname, 'src', 'assets')
 const destDir = path.join(__dirname, 'dist', 'assets')
 
 // Ensure destination directory exists

@@ -100,38 +100,9 @@ const CreateOrder = () => {
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {Object.entries(CLOTH_TYPES).map(([key, cloth]) => {
-                // Map cloth types to actual image filenames
-                const imageMap = {
-                  shirt: 'shirt.avif',
-                  tshirt: 't-shirt.jpg', 
-                  pants: 'trousers.webp',
-                  jeans: 'jeans.avif',
-                  suit: 'suit.webp',
-                  blazer: 'blazers.jpg',
-                  saree: 'saree.jpg',
-                  salwar: 'salwar kameez.jpg',
-                  lehenga: 'lehanga.jpg',
-                  kurta: 'kurta.webp',
-                  dress: 'dress.jpg',
-                  skirt: 'skirt.jpg',
-                  bedsheet: 'bedsheet.jpg',
-                  pillowcover: 'pillow cover.jpg',
-                  blanket: 'blanket.jpg',
-                  comforter: 'blanket.jpg',
-                  towel: 'towel.jpg',
-                  bathrobe: 'bathrope.jpg',
-                  curtain: 'curtains.webp',
-                  tie: 'tie.jpg',
-                  scarf: 'scarf.jpg',
-                  dupatta: 'dupatta.jpg',
-                  jacket: 'jacket.jpg',
-                  wedding: 'wedding dress.jpg',
-                  leather: 'jacket.jpg',
-                  sherwani: 'sherwani.jpg',
-                  coat: 'wintor coat.jpg',
-                  shorts: 'shorts.jpg'
-                }
-                const imageUrl = imageMap[key]?.startsWith('http') ? imageMap[key] : `/images/assets/${imageMap[key] || 'shirt.avif'}`
+                // Direct mapping to cloth type names for images in src/assets
+                const imageUrl = `/assets/${key}.jpg`
+
                 
                 return (
                   <div key={key} className="bg-white/5 dark:bg-gray-700/5 backdrop-blur-sm rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
@@ -141,7 +112,7 @@ const CreateOrder = () => {
                         alt={cloth.name}
                         className="w-full h-32 object-cover"
                         onError={(e) => {
-                          e.target.src = '/images/assets/shirt.avif'
+                          e.target.src = '/assets/shirt.jpg'
                         }}
                       />
                     </div>

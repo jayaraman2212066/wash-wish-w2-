@@ -29,6 +29,16 @@ app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'WashWish API is running', timestamp: new Date().toISOString() });
 });
 
+// Test endpoint for orders
+app.get('/api/test/orders', (req, res) => {
+  try {
+    const orders = orderService.getAllOrders();
+    res.json({ success: true, message: 'Orders endpoint working', count: orders.length });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // Debug endpoint to check orders
 app.get('/api/debug/orders', (req, res) => {
   try {
@@ -97,10 +107,16 @@ app.put('/api/users/profile', authenticate, (req, res) => {
 // Order routes
 app.post('/api/orders', authenticate, (req, res) => {
   try {
+    console.log('Creating order for user:', req.user.userId);
+    console.log('Order data received:', req.body);
+    
     const orderData = { ...req.body, customerId: req.user.userId };
     const order = orderService.createOrder(orderData);
+    
+    console.log('Order created successfully:', order.id);
     res.json({ success: true, message: 'Order created successfully', data: order });
   } catch (error) {
+    console.error('Order creation error:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 });

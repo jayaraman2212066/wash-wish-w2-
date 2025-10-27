@@ -74,12 +74,17 @@ const CreateOrder = () => {
         })),
       }
       
+      console.log('Creating order with data:', orderData)
       const response = await api.post('/orders', orderData)
+      console.log('Order created successfully:', response.data)
       dispatch(addOrder(response.data.data))
       toast.success('Order created successfully!')
       navigate('/orders')
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to create order')
+      console.error('Order creation failed:', error)
+      console.error('Error response:', error.response?.data)
+      const errorMessage = error.response?.data?.message || error.message || 'Failed to create order'
+      toast.error(errorMessage)
     } finally {
       setLoading(false)
     }

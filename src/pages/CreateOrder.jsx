@@ -101,7 +101,7 @@ const CreateOrder = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {Object.entries(CLOTH_TYPES).map(([key, cloth]) => {
                 const imageName = key.replace('_', ' ').toLowerCase()
-                const imageUrl = `/images/assets/${imageName}.jpg`
+                const imageUrl = `/assets/${imageName}.jpg`
                 
                 return (
                   <div key={key} className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
@@ -111,7 +111,7 @@ const CreateOrder = () => {
                         alt={cloth.name}
                         className="w-full h-32 object-cover"
                         onError={(e) => {
-                          e.target.src = '/images/assets/shirt.avif'
+                          e.target.src = '/assets/shirt.avif'
                         }}
                       />
                     </div>

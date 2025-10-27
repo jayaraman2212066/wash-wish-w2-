@@ -108,15 +108,16 @@ const CreateOrder = () => {
                   jeans: 'jeans.avif',
                   suit: 'suit.webp',
                   blazer: 'blazers.jpg',
-                  saree: 'shirt.avif', // fallback
+                  saree: 'shirt.avif',
                   salwar: 'salwar kameez.jpg',
                   lehenga: 'lehanga.jpg',
                   kurta: 'kurta.webp',
-                  dress: 'shirt.avif', // fallback
+                  dress: 'shirt.avif',
                   skirt: 'skirt.jpg',
                   bedsheet: 'bedsheet.jpg',
                   pillowcover: 'pillow cover.jpg',
                   blanket: 'blanket.jpg',
+                  comforter: 'blanket.jpg',
                   towel: 'towel.jpg',
                   bathrobe: 'bathrope.jpg',
                   curtain: 'curtains.webp',
@@ -125,9 +126,12 @@ const CreateOrder = () => {
                   dupatta: 'dupatta.jpg',
                   jacket: 'jacket.jpg',
                   wedding: 'wedding dress.jpg',
-                  sherwani: 'sherwani.jpg'
+                  leather: 'jacket.jpg',
+                  sherwani: 'sherwani.jpg',
+                  coat: 'wintor coat.jpg',
+                  shorts: 'shirt.avif'
                 }
-                const imageUrl = `/assets/${imageMap[key] || 'shirt.avif'}`
+                const imageUrl = `/images/assets/${imageMap[key] || 'shirt.avif'}`
                 
                 return (
                   <div key={key} className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
@@ -137,7 +141,7 @@ const CreateOrder = () => {
                         alt={cloth.name}
                         className="w-full h-32 object-cover"
                         onError={(e) => {
-                          e.target.src = '/assets/shirt.avif'
+                          e.target.src = '/images/assets/shirt.avif'
                         }}
                       />
                     </div>

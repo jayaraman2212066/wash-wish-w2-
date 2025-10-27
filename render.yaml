@@ -2,17 +2,10 @@ services:
   - type: web
     name: washwish-app
     env: node
-    buildCommand: npm install && npx vite build && cd backend && npm install
+    buildCommand: npm install && npm run build
     startCommand: cd backend && npm start
-    staticPublishPath: ./dist
     envVars:
       - key: NODE_ENV
         value: production
-      - key: JWT_SECRET
-        generateValue: true
       - key: PORT
         value: 10000
-      - key: VITE_API_BASE_URL
-        value: /api
-      - key: RAZORPAY_KEY_ID
-        value: rzp_test_your_key_id

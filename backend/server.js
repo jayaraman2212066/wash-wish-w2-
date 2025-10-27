@@ -287,6 +287,33 @@ app.post('/api/ai/estimate-cost', authenticate, (req, res) => {
   }
 });
 
+// SPA Routing - MUST be last route to prevent page reloads
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
+
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => {
+  console.log(`🚀 WashWish Full-Stack App running on port ${PORT}`);
+  console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
+});
+
+module.exports = app; res.json({
+      success: true,
+      data: {
+        items: estimatedItems,
+        baseCost: totalCost,
+        adjustments: { bulkDiscount, seasonalDiscount: 0, loyaltyDiscount: 0, urgentCharges: 0 },
+        finalCost: Math.round(finalCost),
+        estimatedTime: '24-48 hours',
+        confidence: 0.95
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // SPA Routing - MUST be last route
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));

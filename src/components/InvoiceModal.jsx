@@ -4,7 +4,7 @@ const InvoiceModal = ({ isOpen, onClose, order }) => {
   if (!isOpen || !order) return null
 
   const calculateSubtotal = () => {
-    return order.items?.reduce((sum, item) => sum + (item.quantity * item.price), 0) || 0
+    return order.items?.reduce((sum, item) => sum + (item.quantity * (item.pricePerUnit || item.price || 0)), 0) || 0
   }
 
   const subtotal = calculateSubtotal()
@@ -85,8 +85,8 @@ const InvoiceModal = ({ isOpen, onClose, order }) => {
                 <td>${index + 1}</td>
                 <td>${item.type?.charAt(0).toUpperCase() + item.type?.slice(1) || item.name}</td>
                 <td class="text-right">${item.quantity}</td>
-                <td class="text-right">${item.price}</td>
-                <td class="text-right">${item.quantity * item.price}</td>
+                <td class="text-right">${item.pricePerUnit || item.price || 0}</td>
+                <td class="text-right">${item.quantity * (item.pricePerUnit || item.price || 0)}</td>
               </tr>
             `).join('') || '<tr><td colspan="5">No items found</td></tr>'}
           </tbody>
@@ -218,8 +218,8 @@ const InvoiceModal = ({ isOpen, onClose, order }) => {
                     {item.type?.charAt(0).toUpperCase() + item.type?.slice(1) || item.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-right">{item.quantity}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-right">₹{item.price}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-right">₹{item.quantity * item.price}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-right">₹{item.pricePerUnit || item.price || 0}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-right">₹{item.quantity * (item.pricePerUnit || item.price || 0)}</td>
                 </tr>
               )) || (
                 <tr>

@@ -10,6 +10,7 @@ import Register from './pages/Register'
 import VerifyEmail from './pages/VerifyEmail'
 import Dashboard from './pages/Dashboard'
 import Orders from './pages/Orders'
+import OrdersSimple from './pages/OrdersSimple'
 import CreateOrder from './pages/CreateOrder'
 import Payments from './pages/Payments'
 import Reports from './pages/Reports'
@@ -89,7 +90,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/orders" element={<Orders />} />
+        <Route path="/orders" element={<OrdersSimple />} />
         <Route 
           path="/orders/create" 
           element={

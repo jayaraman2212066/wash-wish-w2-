@@ -1,25 +1,31 @@
 const fs = require('fs')
 const path = require('path')
 
-// Copy all assets to public folder for deployment
-const assetsDir = path.join(__dirname, 'assets')
-const publicDir = path.join(__dirname, 'public')
+// Copy all images from public/images/assets to dist folder for deployment
+const sourceDir = path.join(__dirname, 'public', 'images', 'assets')
+const destDir = path.join(__dirname, 'dist', 'assets')
 
-// Ensure public directory exists
-if (!fs.existsSync(publicDir)) {
-  fs.mkdirSync(publicDir, { recursive: true })
+// Ensure destination directory exists
+if (!fs.existsSync(destDir)) {
+  fs.mkdirSync(destDir, { recursive: true })
 }
 
-// Get all files from assets directory
-const assetFiles = fs.readdirSync(assetsDir)
+// Check if source directory exists
+if (!fs.existsSync(sourceDir)) {
+  console.log('Source directory not found:', sourceDir)
+  return
+}
+
+// Get all files from source directory
+const assetFiles = fs.readdirSync(sourceDir)
 
 assetFiles.forEach(file => {
-  const src = path.join(assetsDir, file)
-  const dest = path.join(publicDir, file)
+  const src = path.join(sourceDir, file)
+  const dest = path.join(destDir, file)
   
   if (fs.existsSync(src)) {
     fs.copyFileSync(src, dest)
-    console.log(`Copied ${file} to public folder`)
+    console.log(`Copied ${file} to dist/assets`)
   }
 })
 

@@ -16,8 +16,8 @@ app.use(express.json());
 // Serve static files from React build
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// Serve assets from assets folder
-app.use('/assets', express.static(path.join(__dirname, '../assets')));
+// Serve assets from public/images/assets folder
+app.use('/assets', express.static(path.join(__dirname, '../public/images/assets')));
 
 // Health check
 app.get('/api/health', (req, res) => {

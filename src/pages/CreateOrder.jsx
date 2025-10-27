@@ -108,11 +108,11 @@ const CreateOrder = () => {
                   jeans: 'jeans.avif',
                   suit: 'suit.webp',
                   blazer: 'blazers.jpg',
-                  saree: 'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=300&fit=crop',
+                  saree: 'saree.jpg',
                   salwar: 'salwar kameez.jpg',
                   lehenga: 'lehanga.jpg',
                   kurta: 'kurta.webp',
-                  dress: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=300&fit=crop',
+                  dress: 'dress.jpg',
                   skirt: 'skirt.jpg',
                   bedsheet: 'bedsheet.jpg',
                   pillowcover: 'pillow cover.jpg',
@@ -129,7 +129,7 @@ const CreateOrder = () => {
                   leather: 'jacket.jpg',
                   sherwani: 'sherwani.jpg',
                   coat: 'wintor coat.jpg',
-                  shorts: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=300&fit=crop'
+                  shorts: 'shorts.jpg'
                 }
                 const imageUrl = imageMap[key]?.startsWith('http') ? imageMap[key] : `/images/assets/${imageMap[key] || 'shirt.avif'}`
                 

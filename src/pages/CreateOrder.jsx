@@ -100,8 +100,34 @@ const CreateOrder = () => {
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {Object.entries(CLOTH_TYPES).map(([key, cloth]) => {
-                const imageName = key.replace('_', ' ').toLowerCase()
-                const imageUrl = `/assets/${imageName}.jpg`
+                // Map cloth types to actual image filenames
+                const imageMap = {
+                  shirt: 'shirt.avif',
+                  tshirt: 't-shirt.jpg', 
+                  pants: 'trousers.webp',
+                  jeans: 'jeans.avif',
+                  suit: 'suit.webp',
+                  blazer: 'blazers.jpg',
+                  saree: 'shirt.avif', // fallback
+                  salwar: 'salwar kameez.jpg',
+                  lehenga: 'lehanga.jpg',
+                  kurta: 'kurta.webp',
+                  dress: 'shirt.avif', // fallback
+                  skirt: 'skirt.jpg',
+                  bedsheet: 'bedsheet.jpg',
+                  pillowcover: 'pillow cover.jpg',
+                  blanket: 'blanket.jpg',
+                  towel: 'towel.jpg',
+                  bathrobe: 'bathrope.jpg',
+                  curtain: 'curtains.webp',
+                  tie: 'tie.jpg',
+                  scarf: 'scarf.jpg',
+                  dupatta: 'dupatta.jpg',
+                  jacket: 'jacket.jpg',
+                  wedding: 'wedding dress.jpg',
+                  sherwani: 'sherwani.jpg'
+                }
+                const imageUrl = `/assets/${imageMap[key] || 'shirt.avif'}`
                 
                 return (
                   <div key={key} className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">

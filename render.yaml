@@ -3,7 +3,7 @@ services:
     name: washwish-app
     env: node
     buildCommand: npm install && npm run build
-    startCommand: cd backend && npm start
+    startCommand: node backend/server.js
     envVars:
       - key: NODE_ENV
         value: production

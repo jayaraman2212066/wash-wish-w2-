@@ -7,6 +7,7 @@
     "build": "node copy-assets.cjs && vite build",
     "preview": "vite preview",
     "start": "node backend/server.js",
+    "start:render": "node backend/server.js",
     "install-all": "npm install && cd backend && npm install"
   },
   "dependencies": {
